@@ -140,7 +140,7 @@ char checkWinner() {
 
 void printWinnner(char winner) {
     FILE *p;
-    p = fopen("outcome.txt", "w");
+    p = fopen("outcome1.txt", "w");
     if (winner == e.PLAYER) {
         fprintf(p, "%s", "You Win\n");
         printf("You win\n");
