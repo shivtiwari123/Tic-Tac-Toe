@@ -10,8 +10,6 @@ struct moves {
     char COMPUTER;
 }e;
 
-FILE *p;
-
 void resetBoard();
 void printBoard();
 int checkFreeSpaces();
@@ -22,7 +20,6 @@ void printWinnner(char);
 
 int main() {
     
-    p = fopen("text.txt", "w");
     e.PLAYER = 'X';
     e.COMPUTER = 'Y';
     char winner = ' ';
@@ -45,7 +42,6 @@ int main() {
 
     printBoard();
     printWinnner(winner);
-    fclose(p);
     return 0;
 }
 void resetBoard() {
@@ -92,7 +88,7 @@ void playerMove() {
             printf("Invalid Move\n");
         }
         else {
-            board[x][y] = PLAYER;
+            board[x][y] = e.PLAYER;
             break;
         }
     } while (board[x][y] != ' ');
@@ -111,7 +107,7 @@ void computerMove() {
             y = rand()%3;
         } while (board[x][y] != ' ');
         
-        board[x][y] = COMPUTER;
+        board[x][y] = e.COMPUTER;
     }
     else {
         printWinnner(' ');
@@ -143,17 +139,22 @@ char checkWinner() {
 }
 
 void printWinnner(char winner) {
-    if (winner == PLAYER) {
-        printf("You win\n");
+    FILE *p;
+    p = fopen("outcome.txt", "w");
+    if (winner == e.PLAYER) {
         fprintf(p, "%s", "You Win\n");
+        printf("You win\n");
+        fclose(p);
     }
-    else if (winner == COMPUTER) {
-        printf("You lose\n");
+    else if (winner == e.COMPUTER) {
         fprintf(p, "%s", "You Lose\n");
+        printf("You lose\n");
+        fclose(p);
     }
     else {
-        printf("It's a tie");
         fprintf(p, "%s", "It's a tie\n");
+        printf("It's a tie");
+        fclose(p);
     }
 }
 
