@@ -4,8 +4,13 @@
 #include <time.h>
 
 char board[3][3];
-const char PLAYER = 'X';
-const char COMPUTER = 'O';
+
+struct moves {
+    char PLAYER;
+    char COMPUTER;
+}e;
+
+FILE *p;
 
 void resetBoard();
 void printBoard();
@@ -16,7 +21,10 @@ char checkWinner();
 void printWinnner(char);
 
 int main() {
-
+    
+    p = fopen("text.txt", "w");
+    e.PLAYER = 'X';
+    e.COMPUTER = 'Y';
     char winner = ' ';
     resetBoard();
     while (winner = ' ' && checkFreeSpaces() != 0) {
@@ -37,6 +45,7 @@ int main() {
 
     printBoard();
     printWinnner(winner);
+    fclose(p);
     return 0;
 }
 void resetBoard() {
@@ -136,12 +145,15 @@ char checkWinner() {
 void printWinnner(char winner) {
     if (winner == PLAYER) {
         printf("You win\n");
+        fprintf(p, "%s", "You Win\n");
     }
     else if (winner == COMPUTER) {
         printf("You lose\n");
+        fprintf(p, "%s", "You Lose\n");
     }
     else {
         printf("It's a tie");
+        fprintf(p, "%s", "It's a tie\n");
     }
 }
 
