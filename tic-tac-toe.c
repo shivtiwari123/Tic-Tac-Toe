@@ -80,10 +80,10 @@ void playerMove() {
     {
         printf("Enter Row Number (1-3) : ");
         scanf("%d", &x);
-        x--;
+        //x--;
         printf("Enter Column Number (1-3) : ");
         scanf("%d", &y);
-        y--;
+        //y--;
         if (board[x][y] != ' ') {
             printf("Invalid Move\n");
         }
